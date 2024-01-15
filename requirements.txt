@@ -1,1 +1,1 @@
-#i'll figure this out when i get home
+PyAudio==0.2.14
