@@ -6,3 +6,4 @@
 ## Chat - Send transcribed and formated speech to some LLM (OpenAI GPT4)  
 ## Speak - Send response to TTS API and play response
 
+from src import Speak
