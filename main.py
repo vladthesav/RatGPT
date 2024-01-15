@@ -1,9 +1,18 @@
-#ill implement this when i get home
+from src import Listen, Chat, Speak  
 
-#should have 3 threads running
 
-## Listen - Record audio, detect speech, and send to ASR API (probs OpenAI Whisper)
-## Chat - Send transcribed and formated speech to some LLM (OpenAI GPT4)  
-## Speak - Send response to TTS API and play response
+#listen to user and transcribe
+listen = Listen()
 
-from src import Speak
+#talk to LLM
+chat = Chat() 
+
+#prepare response using TTS 
+speak = Speak() 
+
+def main():
+    pass
+
+
+if __name__ == '__main__':
+    main()

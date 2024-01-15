@@ -16,7 +16,7 @@ class Chat:
 
 
         self.client = OpenAI()
-        
+
         self.model = model 
         self.messages = [
             {"role": "system", "content":system_prompt}
@@ -42,4 +42,4 @@ class Chat:
 
 #sanity check
 #chat = Chat() 
-#print(chat.chat("hi RatGPT, i want to make ratatouille"))
+#print(chat.chat("hi RatGPT, what is the derivative of f(x) = sin(3x)?"))
