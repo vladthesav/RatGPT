@@ -16,7 +16,7 @@ class Listen:
     def __init__(self, model="whisper-1", aggressiveness=2 ):
         #idk how to do VAD, just going to do ASR first 
 
-        self.client = OpenAI()
+        #self.client = OpenAI()
         self.model = "whisper-1"
 
         self.vad = webrtcvad.Vad(aggressiveness)
