@@ -1,45 +1,30 @@
-import threading
 from src.Listen import Listen
+from src.Speak import Speak
+from src.Chat import Chat
 
-
-#listen to user and transcribe
 listen = Listen()
+listen.start()  # Start the listening process
 
-#talk to LLM
-chat = Chat() 
+# Initialize the Chat object
+llm = Chat()
 
-#prepare response using TTS 
-speak = Speak() 
+#TTS 
+tts = Speak()
 
-listen_thread = None
+# Main loop to process transcriptions and get responses from the LLM
+while True:
+    # Wait for a new transcription
+    transcription = listen.get_clip()
+    if transcription==None: continue 
+    #TODO - filter out crap transcriptions
 
-def main():
-    global listen_thread
+    print("user: ", transcription)
 
-    # Start the listening thread
-    listen_thread = threading.Thread(target=listen_and_respond)
-    listen_thread.start()
+    # Process the transcription with the LLM
+    response = llm.chat(transcription)
+    print("bot: ",response)
 
-    try:
-        # Keep the main thread running until interrupted
-        while True:
-            time.sleep(1)  # Or perform other tasks here
-    except KeyboardInterrupt:
-        print("Stopping...")
-        listen_thread.stop()
+    #now play response using tts
+    # Convert the LLM response to speech and play it
+    tts.speak(response)
 
-    # Gracefully stop the listening thread
-    listen.stop()
-    listen_thread.join()
-
-def listen_and_respond():
-    listen.start()
-
-    while listen.is_recording:
-        # Do whatever you want with the transcribed text
-        # For example, print it, send it to an API, etc.
-        transcript = listen.transcribe()
-        print(f"Transcribed text: {transcript}")
-
-if __name__ == '__main__':
-    main()

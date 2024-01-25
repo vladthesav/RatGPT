@@ -1,5 +1,6 @@
 from openai import OpenAI
-
+from playsound import playsound
+import os
 
 class Speak:
 
@@ -27,12 +28,16 @@ class Speak:
 
         if dest == 'file':
             tts_response.stream_to_file(fpath)
+            playsound(fpath)
+            os.remove(fpath)
+
         else: 
             pass
 
     def speak(self, text):
         tts_response = self.tts(text)
         self.stream(tts_response)
+
 
 
 

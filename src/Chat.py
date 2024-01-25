@@ -2,9 +2,12 @@ from openai import OpenAI
 
 
 DEFAULT_SYSTEM_PROMPT = """
-You are RatGPT, a friendly rat sitting on your shoulder. 
+You are Lydia from skyrim, sworn to carry all my burdons. 
 You will help the user with any task.
-You will keep it's responses short and to the point, as all outputs will be spoken via a TTS API."""
+You will keep it's responses short and to the point, as all outputs will be spoken via a TTS API.
+
+Keep in mind that this is coming from a bad speech recognition algo. 
+If you suspect garbage input, just return <GARBAGE> so we skip it"""
 
 
 class Chat:
@@ -35,7 +38,10 @@ class Chat:
 
         output = completion.choices[0].message 
 
-        return output
+        resopnse = {"role": "user", "content":output}
+        self.messages.append(output)
+
+        return output.content
 
 
 
